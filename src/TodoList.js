@@ -8,6 +8,16 @@ export default class TodoList extends Component {
     todos: []
   };
 
+  componentDidMount() {
+    const todos = localStorage.getItem("todos");
+
+    if (todos) {
+      this.setState({
+        todos: JSON.parse(todos)
+      });
+    }
+  }
+
   handleInputChange = e => {
     this.setState({
       newTodo: e.target.value
@@ -15,10 +25,15 @@ export default class TodoList extends Component {
   };
 
   handleAddTodo = e => {
-    this.setState({
-      todos: [...this.state.todos, this.state.newTodo],
-      newTodo: ""
-    });
+    this.setState(
+      {
+        todos: [...this.state.todos, this.state.newTodo],
+        newTodo: ""
+      },
+      () => {
+        localStorage.setItem("todos", JSON.stringify(this.state.todos));
+      }
+    );
   };
 
   render() {
