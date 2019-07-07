@@ -1,5 +1,3 @@
-import { types } from "@babel/core";
-
 export const Types = {
   ADD: "ADD_TODO",
   COMPLETE: "COMPLETE_TODO"
